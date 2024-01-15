@@ -35,7 +35,7 @@ class Summary extends HTMLElement {
             </div>
         </div>
         `
-        this.loadData('../../data.json');
+        this.loadData(`${window.location.href}/data.json`);
 
     }
 
@@ -45,7 +45,6 @@ class Summary extends HTMLElement {
             if (!response.ok) {
                 throw new Error(`Deu erro aqui: ${response.status}`);
             }
-
             const data = await response.json();
             this.populateSummaryItems(data);
         } catch (error) {
