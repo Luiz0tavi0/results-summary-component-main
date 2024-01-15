@@ -50,7 +50,7 @@ class SummaryItem extends HTMLElement {
     renderInitialContent = () => {
         this.shadowRoot.innerHTML = `
             <div id="item"><img id="icon" src="">
-                <h3 id="category-label"></h3>
+                <h2 id="category-label"></h2>
                 <div id="percent"><span id="score"></span> / 100</div>
             </div>
         `
@@ -66,6 +66,7 @@ class SummaryItem extends HTMLElement {
     fillAll() {
         const iconImage = this.shadowRoot.getElementById('icon');
         iconImage.setAttribute('src', this.getAttribute('icon-src'));
+        iconImage.setAttribute('alt', this.getAttribute("category"));
         const category = this.shadowRoot.getElementById("category-label");
         category.innerText = this.getAttribute("category");
 
