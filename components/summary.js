@@ -39,14 +39,20 @@ class Summary extends HTMLElement {
 
     }
 
-    loadData = (filePath) => {
-        fetch(filePath).then(
-            resp => resp.json()
-        ).then(data => this.populateSummaryItems(data)).catch(
-            err => console.log("Deu erro aqui " + err)
-        );
+    loadData = async (filePath) => {
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) {
+                throw new Error(`Deu erro aqui: ${response.status}`);
+            }
 
+            const data = await response.json();
+            this.populateSummaryItems(data);
+        } catch (error) {
+            console.error(`Erro: ${error.message}`);
+        }
     }
+
     populateSummaryItems = (dataItems) => {
         const fragment = document.createDocumentFragment();
         dataItems.forEach(dataItem => {
