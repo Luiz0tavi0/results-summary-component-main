@@ -35,14 +35,17 @@ class Summary extends HTMLElement {
             </div>
         </div>
         `
-        this.loadData('../data.json');
+        this.loadData('../../data.json');
 
     }
 
     loadData = (filePath) => {
         fetch(filePath).then(
             resp => resp.json()
-        ).then(data => this.populateSummaryItems(data))
+        ).then(data => this.populateSummaryItems(data)).catch(
+            err => console.log("Deu erro aqui " + err)
+        );
+
     }
     populateSummaryItems = (dataItems) => {
         const fragment = document.createDocumentFragment();
